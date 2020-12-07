@@ -22,7 +22,7 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-
+  Gender selectGender;
   Color maleCardColor = inactiveCardColor;
   Color femaleCardColor = inactiveCardColor;
 
@@ -55,11 +55,12 @@ class _InputPageState extends State<InputPage> {
                   Expanded(
                     child: GestureDetector(
                       onTap: (){
-                        print('Tap on GestureDetector');
-                        updateColor(Gender.male);
+                       setState(() {
+                         selectGender = Gender.male;
+                       });
                       },
                       child: ReusableCard(
-                        color:maleCardColor,
+                        color: selectGender==Gender.male?activeCardColor:inactiveCardColor,
                         cardChild: IconContent(
                           iconData: FontAwesomeIcons.mars,
                           text: 'MALE',
@@ -69,9 +70,13 @@ class _InputPageState extends State<InputPage> {
                   ),
                   Expanded(
                     child: GestureDetector(
-                      onTap: (){updateColor(Gender.female);},
+                      onTap: (){
+                        setState(() {
+                          selectGender = Gender.female;
+                        });
+                      },
                       child: ReusableCard(
-                        color: femaleCardColor,
+                        color: selectGender == Gender.female?activeCardColor:inactiveCardColor,
                         cardChild: IconContent(
                           iconData: FontAwesomeIcons.venus,
                           text: 'FEMALE',
