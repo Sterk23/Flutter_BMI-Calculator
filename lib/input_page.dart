@@ -18,6 +18,7 @@ class _InputPageState extends State<InputPage> {
   Color femaleCardColor = kInactiveCardColor;
   int height = 180;
   int weight = 75;
+  int age = 28;
 
   @override
   Widget build(BuildContext context) {
@@ -136,13 +137,22 @@ class _InputPageState extends State<InputPage> {
                             children: [
                              RoundIconButton(
                                icon: FontAwesomeIcons.minus,
-
+                               onPressed: (){
+                                 setState(() {
+                                   weight--;
+                                 });
+                               },
                              ),
                               SizedBox(
                                 width: 10.0,
                               ),
                               RoundIconButton(
                                 icon: FontAwesomeIcons.plus,
+                                onPressed: (){
+                                  setState(() {
+                                    weight++;
+                                  });
+                                },
                               ),
                             ],
                           )
@@ -153,6 +163,43 @@ class _InputPageState extends State<InputPage> {
                   Expanded(
                     child: ReusableCard(
                       color: kActiveCardColor,
+                      cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'AGE',
+                            style: kLabelTextStyle,
+                          ),
+                          Text(
+                            age.toString(),
+                            style: kNumberTextStyle,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              RoundIconButton(
+                                icon: FontAwesomeIcons.minus,
+                                onPressed: (){
+                                  setState(() {
+                                    age--;
+                                  });
+                                },
+                              ),
+                              SizedBox(
+                                width: 10.0,
+                              ),
+                              RoundIconButton(
+                                icon: FontAwesomeIcons.plus,
+                                onPressed: (){
+                                  setState(() {
+                                    age++;
+                                  });
+                                },
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -163,19 +210,26 @@ class _InputPageState extends State<InputPage> {
               margin: EdgeInsets.only(top: 10.0),
               width: double.infinity,
               height: kBottomContainerHeight,
+              child: Center(
+                child: Text(
+                  'Calculate your BMI',
+                  style: kButtonTextStyle,
+                ),
+              ),
             )
           ],
         ));
   }
 }
 class RoundIconButton extends StatelessWidget {
-  RoundIconButton({this.icon});
+  RoundIconButton({@required this.icon,@required this.onPressed});
   final IconData icon;
+  final Function onPressed;
   @override
   Widget build(BuildContext context) {
     return RawMaterialButton(
       child: Icon(icon),
-      onPressed: () {  },
+      onPressed: onPressed,
       elevation: 15.0,
       constraints: BoxConstraints.tightFor(
         width: 56.0,
