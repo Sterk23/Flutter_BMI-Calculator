@@ -1,9 +1,11 @@
-import 'package:bmi_calculator/reusable_card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'constants.dart';
-import 'icon_content.dart';
+import 'file:///D:/workspace-flutter/bmi-calculator-flutter/lib/components/reusable_card.dart';
+
+import '../components/bottom_button.dart';
+import '../components/icon_content.dart';
+import '../constants.dart';
 
 enum Gender { male, female }
 
@@ -205,28 +207,17 @@ class _InputPageState extends State<InputPage> {
                 ],
               ),
             ),
-            GestureDetector(
+            BottomButton(
               onTap: (){
                 Navigator.pushNamed(context, '/result');
-
               },
-              child: Container(
-                color: kBottomContainerColor,
-                margin: EdgeInsets.only(top: 10.0),
-                width: double.infinity,
-                height: kBottomContainerHeight,
-                child: Center(
-                  child: Text(
-                    'Calculate your BMI',
-                    style: kButtonTextStyle,
-                  ),
-                ),
-              ),
+              buttonTitle: 'Calculate your BMI',
             )
           ],
         ));
   }
 }
+
 class RoundIconButton extends StatelessWidget {
   RoundIconButton({@required this.icon,@required this.onPressed});
   final IconData icon;
